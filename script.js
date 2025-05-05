@@ -1,6 +1,6 @@
 const defaultSettings = {
   weather: {
-    apiKey: '',
+    apiKey: '37717257f62bf7969bbd090a1f644b77',
   },
   appearance: {
     time: 'meaji',
@@ -20,7 +20,7 @@ if (typeof browser !== 'undefined') {
       browser.storage.local.set({ settings: defaultSettings });
     }
   })
-} else {
+} else if (typeof chrome !== 'undefined') {
   chrome.storage.local.get('settings', function(data) {
     if (data.settings) {
       settings = data.settings;
@@ -256,10 +256,12 @@ document.getElementById('time').addEventListener('click', (e) => {
 
 document.getElementById('settings-button').addEventListener('click', (e) => {
   if (e.button !== 0) return;
-  if (chrome.runtime.openOptionsPage) {
-    chrome.runtime.openOptionsPage();
-  } else if (chrome.runtime) {
+  if (typeof chrome !== 'undefined') {
+    if (chrome.runtime.openOptionsPage) {
+      chrome.runtime.openOptionsPage();
+    } else if (chrome.runtime) {
     window.open(chrome.runtime.getURL('options.html'));
+    }
   } else {
     location.href = 'options.html';
   }

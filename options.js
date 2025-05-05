@@ -1,6 +1,6 @@
 const defaultSettings = {
   weather: {
-    apiKey: '',
+    apiKey: '37717257f62bf7969bbd090a1f644b77',
   },
   appearance: {
     time: 'meaji',
@@ -15,7 +15,7 @@ function loadSettings() {
     browser.storage.local.get('settings').then(data => {
       settings = data.settings || defaultSettings
     })
-  } else {
+  } else if (typeof chrome !== 'undefined') {
     chrome.storage.sync.get('settings', function(data) {
       settings = data.settings || defaultSettings;
     });
@@ -43,7 +43,7 @@ function saveSettings() {
 
   if (typeof browser !== 'undefined') {
     browser.storage.local.set({ settings });
-  } else {
+  } else if (typeof chrome !== 'undefined') {
     chrome.storage.sync.set({ settings });
   }
 
