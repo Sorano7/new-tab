@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimalist New Tab Options</title>
+  <style>
+    :root {
+      --bg-color: #f5f5f7;
+      --text-color: #333;
+      --accent-color: #5E81AC;
+      --input-bg: #fff;
+      --border-color: #ddd;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-color: #2E3440;
+        --text-color: #ECEFF4;
+        --accent-color: #88C0D0;
+        --input-bg: #3B4252;
+        --border-color: #4C566A;
+      }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      padding: 2rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+
+    .option-group {
+      background-color: var(--input-bg);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      background-color: var(--input-bg);
+      color: var(--text-color);
+    }
+
+    button {
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.2s ease;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    button.secondary {
+      background-color: transparent;
+      color: var(--accent-color);
+      border: 1px solid var(--accent-color);
+    }
+
+    .checkbox-group {
+      margin-bottom: 0.5rem;
+      display: flex;
+    }
+
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      text-wrap: nowrap;
+      font-weight: 400;
+    }
+
+    .checkbox-group input {
+      margin-right: 1rem;
+    }
+
+    .save-container {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1rem;
+    }
+
+    .save-status {
+      margin-right: 1rem;
+      display: flex;
+      align-items: center;
+      color: green;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .save-status.visible {
+      opacity: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>New Tab Settings</h1>
+
+    <div class="option-group">
+      <h2>Weather Settings</h2>
+      <div class="form-group">
+        <label for="api-key">OpenWeatherMap API Key</label>
+        <input type="text" id="api-key" placeholder="Enter your API key">
+      </div>
+    </div>
+
+    <div class="option-group">
+      <h2>Appearance</h2>
+      <div class="form-group">
+        <label for="time">Time type</label>
+        <select id="time">
+          <option value="unix">Unix</option>
+          <option value="meaji">Meaji</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="quote">Quote</label>
+        <input type="text" id="quote" placeholder="">
+      </div>
+    </div>
+
+    <div class="save-container">
+      <div class="save-status" id="save-status">
+        Settings saved ✓
+      </div>
+      <button id="save-button">Save Settings</button>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+
+</html>
