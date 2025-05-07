@@ -1,10 +1,10 @@
 const defaultSettings = {
   weather: {
-    apiKey: '37717257f62bf7969bbd090a1f644b77',
+    apiKey: '',
   },
   appearance: {
-    time: 'meaji',
-    quote: 'Intueor in praesentia. Intueri, ergo intus.'
+    time: 'unix',
+    quote: 'Lorem ipsum'
   },
 }
 
@@ -19,6 +19,8 @@ function loadSettings() {
     chrome.storage.sync.get('settings', function(data) {
       settings = data.settings || defaultSettings;
     });
+  } else {
+    settings = JSON.parse(localStorage.getItem('settings')) || defaultSettings;
   }
 
   document.getElementById('api-key').value = settings.weather.apiKey || '';
@@ -45,6 +47,8 @@ function saveSettings() {
     browser.storage.local.set({ settings });
   } else if (typeof chrome !== 'undefined') {
     chrome.storage.sync.set({ settings });
+  } else {
+    localStorage.setItem('settings', JSON.stringify(settings));
   }
 
   const saveStatus = document.getElementById('save-status');

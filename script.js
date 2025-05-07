@@ -1,10 +1,10 @@
 const defaultSettings = {
   weather: {
-    apiKey: '37717257f62bf7969bbd090a1f644b77',
+    apiKey: '',
   },
   appearance: {
-    time: 'meaji',
-    quote: 'Intueor in praesentia. Intueri, ergo intus.'
+    time: 'unix',
+    quote: 'Lorem ipsum'
   },
 }
 
@@ -30,6 +30,11 @@ if (typeof browser !== 'undefined') {
       chrome.storage.local.set({ settings: defaultSettings });
     }
   });
+} else {
+  settings = JSON.parse(localStorage.getItem('settings'));
+  if (!settings) {
+    localStorage.setItem('settings', JSON.stringify(defaultSettings));
+  }
 }
 
 function applySettings() {  
@@ -244,6 +249,8 @@ function toggleTimeType() {
 
 updateTime();
 setInterval(updateTime, 5000)
+
+updateQuote();
 
 fetchWeather();
 
